@@ -41,3 +41,6 @@ VALUES
 
 SELECT * FROM it_group;
 SELECT * FROM subject;
+
+INSERT INTO Lesson
+VALUES()
