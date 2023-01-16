@@ -2,26 +2,27 @@ from datetime import datetime
 
 class Lesson:
     #TODO Lesson class
-    def __init__(self, title, start_datetime, lesson_type, group_name, subject_title, topic_num):
-        self._title = title
-        self._start_datetime = start_datetime
+    def __init__(self, topic, date, lesson_type, group_name, subject_title, topic_num):
+        self._topic = topic
+        self._date = date
         self._lesson_type =lesson_type
         self._group_name = group_name
         self._subject_title = subject_title
         self._topic_num = topic_num
 
-    def get_title(self):
-        return self._title
+
+    def get_topic(self):
+        return self._topic
     
-    def set_title(self, title):
-        self._title = title
+    def set_topic(self, topic):
+        self._topic = topic
 
 
-    def get_start_datetime(self):
-        return self._start_datetime
+    def get_date(self):
+        return self._date
     
-    def set_start_datetime(self, start_datetime):
-        self._start_datetime = start_datetime
+    def set_date(self, date):
+        self._date = date
 
 
     def get_lesson_type(self):
@@ -51,26 +52,30 @@ class Lesson:
     def set_topic_num(self, topic_num):
         self._topic_num = topic_num
 
-    
-    # def __repr__(self):
-    #     return self._title + ", " + self._subject_title + ", " + self._group_name
 
+    def __repr__(self) -> str:
+        return str(self._subject_title) + " " + str(self._group_name) + " " + str(self._date) + " " + str(Lesson.PRICE) + " грн" 
 
-    title = property(get_title, set_title)
+    topic = property(get_topic, set_topic)
     
-    start_datetime = property(get_start_datetime, set_start_datetime)
+    date = property(get_date, set_date)
     
     lesson_type = property(get_lesson_type, set_lesson_type)
     
     group_name = property(get_group_name, set_group_name)
 
-    subject_title = property(get_title, set_title)
+    subject_title = property(get_subject_title, set_subject_title)
 
     topic_num = property(get_topic_num, set_topic_num)
+
+    #Price for one lesson
+    PRICE = 200
+
+
 
 if __name__ == "__main__":
     print("[Testing lesson class...]")
 
-    l = Lesson("3d space rocket", datetime(2023, 1, 15, 12, 0), "Основна", "H2212", "Tinkercad", 5)
+    l = Lesson("3d space rocket", datetime(2023, 1, 15), "Основна", "H2212", "Tinkercad", 5)
 
     print(l)

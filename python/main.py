@@ -1,23 +1,49 @@
 import mysql.connector
+import connector
+from group import Group
 
 def main():
-    dataBase = mysql.connector.connect(
-        host ="localhost",
-        user ="root",
-        passwd ="KozychDB2022"
-    )
+    show_menu()
 
-    cursor = dataBase.cursor()
 
-    cursor.execute("USE lesson")
-    cursor.execute("""
-        SELECT subject.title, it_group.title, start_time, lesson_type
-        FROM Lesson JOIN Subject on lesson.subject_id = subject.id 
-        join it_group on lesson.group_id = it_group.id;
-    """)
+def decorate(foo):
+    #TODO decorator for menu
+    pass
 
-    for temp in cursor:
-        print(temp)
+def show_menu():
+    while True:
+        print(
+            "1) Show groups",
+            "2) Show lessons...",
+            "3) Show subjects",
+            "4) Show price for lesson",
+            "5) Calculate month salary",
+            sep = "\n"
+            )
+        mode = input(">>> ")
+        
+        if mode == "1":
+            show_groups()
+        elif mode == "2":
+            pass
+        elif mode == "3":
+            pass
+        elif mode == "4":
+            pass
+        elif mode == "5":
+            pass
+        else:
+            print("Wrong input!!!")
+
+    
+def show_groups():
+    groups = connector.get_groups()
+    for group in groups:
+        print(str(group.id) + ".", group.title + ";")
+
+#TODO menu functions
+
+
 
 if __name__ == "__main__":
     main()

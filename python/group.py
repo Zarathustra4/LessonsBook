@@ -16,6 +16,9 @@ class Group:
         print("<<< It is impossible to change id of group!!! >>>")
         return None
 
+    def __repr__(self) -> str:
+        return "{id: " + str(self._id) + ", title: " + self._title + "}"
+
     title = property(get_title, set_title)
     id = property(get_id, set_id)
 
