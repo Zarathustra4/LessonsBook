@@ -27,6 +27,26 @@ def get_groups():
 
     return groups
 
+def get_subjects():
+    cursor.execute("SELECT title FROM Subject")
+    subjects = []
+    for row in cursor:
+        sub = Subject(row[0])
+        subjects.append(sub)
+
+    return subjects
+
+def add_subject(subject_title):
+    cursor.execute(f"""
+        INSERT INTO Subject (title, lessons_number)
+        VALUES ({subject_title}, 12);
+    """)
+
+def add_group(group_title):
+    cursor.execute(f"""
+        INSERT INTO IT_Group (title) VALUES ({group_title});
+    """)
+
 def get_lessons_of_month(month: int):
     if not isinstance(month, int):
         raise Exception("Wrong input type, must be integer!!!")
@@ -35,17 +55,18 @@ def get_lessons_of_month(month: int):
     
     
     cursor.execute("USE lesson")
-    cursor.execute(f"""SELECT topic, lesson_date, lesson_type, it_group.title, subject.title, topic_num
+    cursor.execute(f"""SELECT topic, lesson_date, it_group.title, subject.title, topic_num, needs_working_out 
                     FROM lesson JOIN it_group ON lesson.group_id = it_group.id JOIN subject ON lesson.subject_id = subject.id
                     WHERE MONTH(lesson_date) = {month};""")
 
     lessons = []
     
     for row in cursor:
-        print(row[0], row[1], row[2], row[3], row[4], row[5])
+        # print(type(row[2]))
         l = Lesson(row[0], row[1], row[2], row[3], row[4], row[5])
 
         lessons.append(l)
+
     return lessons
 
 if __name__ == "__main__":

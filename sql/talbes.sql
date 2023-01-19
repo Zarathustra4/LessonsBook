@@ -29,18 +29,5 @@ CREATE TABLE Lesson(
     foreign key(subject_id) references Subject(id)
 );
 
-
-INSERT INTO it_group(title)
-VALUES ("H2212"), ("B2111");
-
-INSERT INTO Subject(title, lessons_number)
-VALUES
-("Створення сайтів Wix і Сanva", 11),
-("Python Junior", 12),
-("Tinkercad", 12);
-
-SELECT * FROM it_group;
-SELECT * FROM subject;
-
-INSERT INTO Lesson
-VALUES()
+ALTER TABLE Lesson DROP COLUMN start_time;
+ALTER TABLE Lesson ADD COLUMN needs_working_out BOOL;
