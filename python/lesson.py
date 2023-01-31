@@ -11,6 +11,9 @@ class Lesson:
         self._topic_num = topic_num
         self._needs_working_out = needs_working_out
 
+    def get_tuple(self):
+        return (self._topic, self._lesson_date, self._group, self._subject, self._topic_num, self._needs_working_out)
+
     def __repr__(self):
         s = "{ "
         if self._topic:

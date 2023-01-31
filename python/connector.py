@@ -37,15 +37,41 @@ def get_subjects():
     return subjects
 
 def add_subject(subject_title):
+    cursor.execute("USE lesson")
     cursor.execute(f"""
         INSERT INTO Subject (title, lessons_number)
-        VALUES ({subject_title}, 12);
+        VALUES ("{subject_title}", 12);
     """)
 
 def add_group(group_title):
     cursor.execute(f"""
         INSERT INTO IT_Group (title) VALUES ({group_title});
     """)
+
+
+def find_group_id(group_name: str) -> int:
+    cursor.execute(f"""
+        SELECT DISTINCT id FROM IT_Group WHERE title = "{group_name}";  
+    """)
+
+    id = None
+    for _ in cursor:
+        print(_)
+    return id
+
+def add_lesson(lesson: Lesson):
+    row = lesson.get_tuple()
+
+    group_name = lesson._group
+    group_id = find_group_id(group_name)
+    print(group_id)
+
+    cursor.execute(f"""
+        INSERT INTO Lesson(topic, lesson_date, group_id, subject_id, topic_num, needs_working_out)
+        VALUES("{row[0]}", "{row[1]}", {row[2]}, {row[3]}, {row[4]}, {row[5]});
+    """)
+
+
 
 def get_lessons_of_month(month: int):
     if not isinstance(month, int):
@@ -69,7 +95,9 @@ def get_lessons_of_month(month: int):
 
     return lessons
 
+
 if __name__ == "__main__":
-    print("[Testing viewer...]")
-    
-    print(get_lessons_of_month(1))
+    lesson = Lesson("Test", datetime(2023, 1, 31), "H2212", "Python Junior", 8, False)
+    print(lesson._group)
+
+    add_lesson(lesson)
