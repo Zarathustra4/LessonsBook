@@ -22,7 +22,8 @@ def show_menu(title = "[Menu]"):
         "4) Show price for lesson",
         "5) Calculate month salary",
         "6) Add a lesson",
-        "7) Quit",
+        "7) Add a group",
+        "8) Quit",
         sep = "\n"
         )
 
@@ -32,11 +33,20 @@ def show_groups(title = "[Groups]"):
     count = 1
     for group in groups:
         print(count, group, sep=". ", end=";\n")
+        count += 1
 
 #TODO menu functions
 @decorate
 def show_lessons(title = "[Lessons]"):
-    print("[Chose the month]")
+    print("[Choose the year]")
+    try:
+        year = int(input(">>> "))
+    except:
+        print("[Wrong input, it must be an integer number!!!]")
+        return
+
+
+    print("[Choose the month]")
     try:
         month = int(input(">>> "))
     except:
@@ -47,13 +57,23 @@ def show_lessons(title = "[Lessons]"):
         print("[Wrong input, the month must be within 1 and 12!!!]")
         return
     
-    lessons = connector.get_lessons_of_month(month)
+
+
+    lessons = connector.get_lessons(year, month)
     for lesson in lessons:
         print("{", lesson, "}")
      
 @decorate
 def calc_salary(title = "[ Salary calculation ]"):
-    print("[Chose the month]")
+    print("[Choose the year]")
+    try:
+        year = int(input(">>> "))
+    except:
+        print("[Wrong input, it must be an integer number!!!]")
+        return
+    
+
+    print("[Choose the month]")
     try:
         month = int(input(">>> "))
     except:
@@ -64,7 +84,7 @@ def calc_salary(title = "[ Salary calculation ]"):
         print("[Wrong input, the month must be within 1 and 12!!!]")
         return
     
-    print(len(connector.get_lessons_of_month(month)) * Lesson.PRICE, "грн")
+    print(len(connector.get_lessons(year, month)) * Lesson.PRICE, "грн")
 
 
 
@@ -199,3 +219,8 @@ def add_lesson(title = "[ Add a lesson ]"):
     connector.add_lesson(lesson)
 
     #TODO end this function and create function in connector
+
+
+def add_group():
+    title = input("Print title of a group\n>>> ")
+    connector.add_group(title)

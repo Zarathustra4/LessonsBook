@@ -25,7 +25,9 @@ def run():
             calc_salary("[ Salary calculation ]")
         elif mode == "6":
             add_lesson("[ Add a lesson ]")
-        elif mode == "7" or mode.upper() == "Q":
+        elif mode == "7":
+            add_group()
+        elif mode == "8" or mode.upper() == "Q":
             print("[ End of work ]")
             exit()
         else:
