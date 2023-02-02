@@ -23,7 +23,8 @@ def show_menu(title = "[Menu]"):
         "5) Calculate month salary",
         "6) Add a lesson",
         "7) Add a group",
-        "8) Quit",
+        "8) Add a subject",
+        "9) Quit",
         sep = "\n"
         )
 
@@ -64,6 +65,18 @@ def show_lessons(title = "[Lessons]"):
         print("{", lesson, "}")
      
 @decorate
+def show_subjects(title = "[Subjects]"):
+    subjects = connector.get_subjects()
+    count = 1
+    for subject in subjects:
+        print(count, subject, sep=". ", end=";\n")
+        count += 1
+
+@decorate
+def show_price(title = "[Price]"):
+    print("The price for a lesson is -", Lesson.PRICE, "грн")
+
+@decorate
 def calc_salary(title = "[ Salary calculation ]"):
     print("[Choose the year]")
     try:
@@ -88,7 +101,6 @@ def calc_salary(title = "[ Salary calculation ]"):
 
 
 
-#TODO universal choosing function
 def choose_subject(print_subs = True):
     subjects = connector.get_subjects()
     count = 1
@@ -142,6 +154,20 @@ def choose_group(print_groups = True):
         else:
             return " "
 
+def choose(choose_table):    
+    count = 0
+    table = None
+    while not table:
+        if count == 3:
+            answer = input("Continue? [y/n]\n>> ")
+            if answer.lower() == "y":
+                count = 0
+            elif answer.lower() == "n":
+                return " "
+        table = choose_table(not bool(count))
+        count += 1
+    
+    return table
 
 
 
@@ -161,23 +187,6 @@ def input_date():
     
     return datetime(year, month, day)
 
-
-def choose(choose_table):    
-    count = 0
-    table = None
-    while not table:
-        if count == 3:
-            answer = input("Continue? [y/n]\n>> ")
-            if answer.lower() == "y":
-                count = 0
-            elif answer.lower() == "n":
-                return " "
-        table = choose_table(not bool(count))
-        count += 1
-    
-    return table
-
-
 def input_topic():
     try:
         topic_num = int(input("Print topic num\n>> "))
@@ -185,7 +194,6 @@ def input_topic():
         print("Must be integer number!!!")
     
     return topic_num
-
 
 def input_work_out():    
     print("Does the lesson need to be worked out? [y/n]")
@@ -199,6 +207,11 @@ def input_work_out():
         print("Wrong input!!!")
     
     return need_work_out 
+
+
+
+
+
 
 @decorate
 def add_lesson(title = "[ Add a lesson ]"):
@@ -218,9 +231,13 @@ def add_lesson(title = "[ Add a lesson ]"):
 
     connector.add_lesson(lesson)
 
-    #TODO end this function and create function in connector
-
-
-def add_group():
+@decorate
+def add_group(title = "[ Add a group ]"):
     title = input("Print title of a group\n>>> ")
     connector.add_group(title)
+
+
+@decorate
+def add_subject(title = "[ Add a subject ]"):
+    title = input("Print the title of a subject\n>> ")
+    connector.add_subject(title)

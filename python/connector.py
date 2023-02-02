@@ -16,7 +16,7 @@ cursor.execute("USE lesson")
 def get_groups():
     
     cursor.execute("""
-        SELECT * FROM it_Group
+        SELECT * FROM it_Group;
     """)
 
     groups = []
@@ -28,7 +28,7 @@ def get_groups():
     return groups
 
 def get_subjects():
-    cursor.execute("SELECT title FROM Subject")
+    cursor.execute("SELECT title FROM Subject;")
     subjects = []
     for row in cursor:
         sub = Subject(row[0])
@@ -37,7 +37,7 @@ def get_subjects():
     return subjects
 
 def add_subject(subject_title):
-    cursor.execute("USE lesson")
+    cursor.execute("USE lesson;")
     cursor.execute(f"""
         INSERT INTO Subject (title, lessons_number)
         VALUES ("{subject_title}", 12);
@@ -45,7 +45,7 @@ def add_subject(subject_title):
 
 def add_group(group_title):
     cursor.execute(f"""
-        INSERT INTO IT_Group (title) VALUES ({group_title});
+        INSERT INTO IT_Group (title) VALUES ("{group_title}");
     """)
 
 
@@ -140,5 +140,6 @@ def get_lessons(year: int, month: int):
 
 
 if __name__ == "__main__":
-    lesson = Lesson("Test", datetime(2023, 1, 31), "H2212", "Python Junior", 8, False)
-    add_lesson(lesson)
+    cursor.execute("""INSERT INTO IT_Group(title) VALUES ("Test Group");""")
+
+    cursor.execute("""Select * from it_group;""")
