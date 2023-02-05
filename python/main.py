@@ -1,6 +1,3 @@
-from group import Group
-from lesson import Lesson
-from enum import Enum
 from controller import *
 
 

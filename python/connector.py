@@ -2,7 +2,6 @@ import mysql.connector
 from group import Group
 from lesson import Lesson
 from subject import Subject
-from datetime import datetime
 
 _dataBase = mysql.connector.connect(
         host ="localhost",
@@ -10,7 +9,7 @@ _dataBase = mysql.connector.connect(
         passwd ="KozychDB2022"
 )
 cursor = _dataBase.cursor()
-cursor.execute("USE lesson")
+cursor.execute("USE lesson;")
 
 
 def get_groups():

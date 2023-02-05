@@ -1,5 +1,5 @@
 from datetime import datetime
-from enum import Enum
+
 
 class Lesson:
     #TODO Lesson class
@@ -15,26 +15,9 @@ class Lesson:
         return (self._topic, self._lesson_date, self._group, self._subject, self._topic_num, self._needs_working_out)
 
     def __repr__(self):
-        s = "{ "
-        if self._topic:
-            s += str(self._topic)
-        s += " | "
-        if self._lesson_date:
-            s += str(self._lesson_date)
-        s += " | "
-        if self._group:
-            s += str(self._group)
-        s += " | "
-        if self._subject:
-            s += str(self._subject)
-        s += " | "
-        if self._topic_num:
-            s += str(self._topic_num)
-        s += " | "
-        if self._needs_working_out:
-            s += "Потребує відпрацювання"
-        s += " }"
-        return s
+        need_work_out = "Потребує відпрацювання" if self._needs_working_out else "Не потребує відпрацювання"
+        return f"{self._topic} | {self._lesson_date} | {self._group} | {self._subject} | {self._topic_num} | {need_work_out}"
+
     #Price for one lesson
     PRICE = 200
 
