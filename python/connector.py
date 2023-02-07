@@ -1,4 +1,5 @@
-import mysql.connector 
+import mysql
+import mysql.connector
 from group import Group
 from lesson import Lesson
 from subject import Subject
@@ -36,7 +37,6 @@ def get_subjects():
     return subjects
 
 def add_subject(subject_title):
-    cursor.execute("USE lesson;")
     cursor.execute(f"""
         INSERT INTO Subject (title, lessons_number)
         VALUES ("{subject_title}", 12);
@@ -44,7 +44,7 @@ def add_subject(subject_title):
 
 def add_group(group_title):
     cursor.execute(f"""
-        INSERT INTO IT_Group (title) VALUES ("{group_title}");
+        INSERT INTO it_Group (title) VALUES ("{group_title}");
     """)
 
 
@@ -136,7 +136,8 @@ def get_lessons(year: int, month: int):
 
     return lessons
 
-
+def commit():
+    _dataBase.commit()
 
 if __name__ == "__main__":
     cursor.execute("""INSERT INTO IT_Group(title) VALUES ("Test Group");""")

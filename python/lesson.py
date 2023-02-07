@@ -3,7 +3,7 @@ from datetime import datetime
 
 class Lesson:
     #TODO Lesson class
-    def __init__(self, topic, lesson_date, group, subject, topic_num, needs_working_out):
+    def __init__(self, topic, lesson_date : datetime, group, subject, topic_num, needs_working_out):
         self._topic = topic
         self._lesson_date = lesson_date
         self._group = group
@@ -22,8 +22,17 @@ class Lesson:
     PRICE = 200
 
 if __name__ == "__main__":
-    print("[Testing lesson class...]")
-
-    l = Lesson("3d space rocket", datetime(2023, 1, 15), "Основна", "H2212", "Tinkercad", 5)
-
-    print(l)
+    import mysql.connector
+    
+    _dataBase = mysql.connector.connect(
+            host ="localhost",
+            user ="root",
+            passwd ="KozychDB2022"
+    )
+    cursor = _dataBase.cursor()
+    cursor.execute("USE gradebook;")
+    
+    cursor.execute("Select * from Student;")
+    
+    for _ in cursor:
+        print(_)

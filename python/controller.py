@@ -210,7 +210,8 @@ def input_work_out():
 
 
 
-
+def commit():
+    connector.commit()
 
 
 @decorate
@@ -235,7 +236,6 @@ def add_lesson(title = "[ Add a lesson ]"):
 def add_group(title = "[ Add a group ]"):
     title = input("Print title of a group\n>>> ")
     connector.add_group(title)
-
 
 @decorate
 def add_subject(title = "[ Add a subject ]"):

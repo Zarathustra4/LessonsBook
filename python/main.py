@@ -31,6 +31,7 @@ def run():
                 add_subject("[ Add a subject ]")
             elif mode == "9" or mode.upper() == "Q":
                 print("[ End of work ]")
+                commit()
                 exit()
             else:
                 print("Wrong input!!!")
